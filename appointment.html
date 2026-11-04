@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hope Care Hospital | Book & Hurry Doctor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- Top Emergency Alert Bar -->
+  <div class="bg-red-600 text-white text-xs font-bold px-4 py-2 flex justify-between items-center">
+    <div class="flex items-center space-x-2 max-w-7xl mx-auto w-full justify-between">
+      <span>🚨 Emergency Hotline: <a href="tel:+18005550199" class="underline">+1 (800) 555-0199</a></span>
+      <a href="contact.html" class="bg-white text-red-600 px-3 py-1 rounded text-xs hover:bg-red-100 transition">🚑 Emergency Ambulance</a>
+    </div>
+  </div>
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center text-xl font-bold">┼</div>
+        <span class="text-xl font-bold text-slate-900">Hope Care Hospital</span>
+      </a>
+      <nav class="hidden md:flex space-x-6 text-sm font-semibold">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="about.html" class="hover:text-blue-600">About Us</a>
+        <a href="departments.html" class="hover:text-blue-600">Departments</a>
+        <a href="doctors.html" class="hover:text-blue-600">Doctors</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact Us</a>
+      </nav>
+      <a href="appointment.html" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition">📅 Book Appointment</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-12 flex-grow w-full">
+    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-md">
+      
+      <!-- Dynamic Title Banner -->
+      <div id="formBanner" class="mb-6 p-4 rounded-xl bg-blue-50 border border-blue-200">
+        <h1 id="pageHeading" class="text-2xl font-bold text-blue-900">📅 Book a Medical Appointment</h1>
+        <p id="pageSubheading" class="text-blue-700 text-sm">Schedule a consultation with our experienced clinical specialists.</p>
+      </div>
+
+      <form id="bookingForm" onsubmit="submitForm(event)" class="space-y-4">
+        
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Patient Full Name *</label>
+          <input type="text" id="patientName" required placeholder="Enter full name" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Phone Number (For Instant SMS Confirmation) *</label>
+            <input type="tel" id="patientPhone" required placeholder="+1 (555) 000-0000" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Department *</label>
+            <select id="deptSelect" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+              <option value="General Medicine">General Medicine</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Neurology">Neurology</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Orthopedics">Orthopedics</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Request Specific Doctor (Optional)</label>
+          <input type="text" id="doctorInput" placeholder="e.g. Dr. Sarah Jenkins" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Preferred Date *</label>
+            <input type="date" id="appDate" required class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Preferred Time *</label>
+            <select id="appTime" class="w-full px-4 py-2.5 text-sm border border-slate-300 rounded-lg focus:outline-blue-600">
+              <option>Urgent / Immediate (Next Available)</option>
+              <option>Morning (09:00 AM - 12:00 PM)</option>
+              <option>Afternoon (02:00 PM - 05:00 PM)</option>
+              <option>Evening (05:00 PM - 08:00 PM)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition mt-4 text-base shadow-md">
+          Confirm & Submit Request
+        </button>
+      </form>
+
+      <!-- Confirmation Screen -->
+      <div id="successMsg" class="hidden text-center py-6">
+        <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4">✓</div>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">Request Submitted Successfully!</h2>
+        <p class="text-slate-600 text-sm mb-4">Your Booking Ref: <strong id="refNumber" class="text-blue-600">HC-8921</strong></p>
+        <p class="text-slate-500 text-xs mb-6">Our reception desk will contact your phone number shortly to verify details.</p>
+        <a href="index.html" class="inline-block bg-slate-900 text-white text-sm font-semibold px-6 py-2.5 rounded-lg">Back to Home</a>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-slate-900 text-slate-400 py-6 text-center text-sm border-t border-slate-800">
+    &copy; 2026 Hope Care Hospital. All rights reserved.
+  </footer>
+
+  <script>
+    // Read URL parameters to adapt mode
+    window.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const isHurry = params.get('type') === 'hurry';
+      const doctor = params.get('doctor');
+      const dept = params.get('dept');
+
+      if (isHurry) {
+        document.getElementById('formBanner').className = "mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200";
+        document.getElementById('pageHeading').innerText = "⚡ Hurry a Doctor (Fast-Track Request)";
+        document.getElementById('pageSubheading').innerText = "Priority dispatch request for urgent medical consultation.";
+        document.getElementById('submitBtn').className = "w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-extrabold py-3 rounded-xl transition mt-4 text-base shadow-md";
+        document.getElementById('submitBtn').innerText = "⚡ Priority Hurry Request";
+      }
+
+      if (doctor) document.getElementById('doctorInput').value = doctor;
+      if (dept) document.getElementById('deptSelect').value = dept;
+
+      // Set default date to today
+      document.getElementById('appDate').valueAsDate = new Date();
+    });
+
+    function submitForm(e) {
+      e.preventDefault();
+      document.getElementById('bookingForm').classList.add('hidden');
+      document.getElementById('formBanner').classList.add('hidden');
+      document.getElementById('refNumber').innerText = 'HC-' + Math.floor(100000 + Math.random() * 900000);
+      document.getElementById('successMsg').classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
